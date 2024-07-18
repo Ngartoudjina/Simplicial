@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="bootstrap-5.3.2-dist\bootstrap-5.3.2-dist\css\bootstrap.min.css">
+    <link rel="stylesheet" href="jast.css">
+    <title>Formulaire</title>
+</head>
+
+<body>
+    <div class="contain col">
+
+        <div class="title"><em>Sign up</em></div>
+
+        <div class="container">
+            <form novalidate class="col contenir" id="userForm">
+                <div class="contient">
+                    <input type="text" name="email" id="mail" class="entrer" placeholder="abcd@gmail.com">
+
+                    <div id="error1" style="color:red;"></div>
+
+                    <input type="text" name="password" id="pass" class="entrer" placeholder="uvwxyz">
+
+                    <div id="error2" style="color:red;"></div>
+                    <div class="checking">
+
+                        <input type="checkbox" name="langue" id="check" value="verify">
+                        <label for="2">J'accepte toutes les conditions</label>
+
+                    </div>
+                    <div class="checking">
+
+                        <input type="checkbox" name="langue" id="check2" value="verify">
+                        <label for="2">Je confirme avoir au moins 18ans</label>
+
+                    </div>
+
+
+                    <div id="error3" style="color:red;"></div>
+
+                    <div class="cont">
+
+                        <button type="submit">S'inscrire</button>
+
+                    </div>
+
+                    <div class="sgn">Avez-vous déjà un compte? <em><a href="">Se connecter</a></em></div>
+
+
+
+                </div>
+            </form>
+        </div>
+
+    </div>
+    <script>
+        const Form = document.getElementById('userForm');
+
+        Form.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const email = document.getElementById('mail').value.trim();
+
+            const password = document.getElementById('pass').value.trim();
+
+            // trim permet de supprimer les espaces en debut et en fin de l'entrer
+
+            let a1 = false;
+            let a2 = email.endsWith('@gmail.com');
+            console.log(a2);
+            const error1 = document.getElementById('error1');
+            const error2 = document.getElementById('error2');
+            const error3 = document.getElementById('error3');
+
+            const check1 = document.getElementsByName('langue')[0].checked
+            const check2 = document.getElementsByName('langue')[1].checked
+
+            error1.textContent = '';
+            error2.textContent = '';
+
+            error1.style.fontSize = '12px';
+            // console.log('mail : ', email);
+            // console.log('Password : ', password)
+
+            function isEmailValid(email) {
+                return /^[\w\.-]+@[\w\.-]+\.[a-zA-Z]{2,}$/.test(email);
+            }
+
+            if (email === '') {
+                console.log('Email 1: ');
+                error1.textContent = 'Veuillez remplir le champs de l\'email';
+                return;
+            } else if (isEmailValid(email) == false) {
+                error1.textContent = 'format non valide, ex : abcd@gmail.com';
+                return;
+            } else if (password === '') {
+                error2.textContent = 'Veuillez remplir le champs du mot de passe';
+                return;
+            } else if (check1 == false) {
+                error3.textContent = 'Vous n\'etes pas éligible, sinon veuillez bien cocher';
+                return;
+            } else if (check2 == false) {
+                error3.textContent = 'Vous n\'etes pas éligible, sinon veuillez bien cocher';
+                return;
+            }
+
+            Form.submit()
+
+
+        })
+    </script>
+</body>
+
+</html>
